@@ -28,3 +28,12 @@ h2{
     vertical-align: central;
 }
 
+.container{
+    display: flex;
+    flex-direction: row;
+}
+form{
+    background-color: lightgray;
+    display: flex;
+    flex-direction: column;
+}

@@ -52,5 +52,15 @@ namespace Movies
             }
             return returnMovies;
         }
+        public List<Movie> FilterByIMBD(List<Movie> movies, double? IMBD)
+        {
+            List<Movie> returnMovies = new List<Movie>();
+            foreach (Movie m in movies)
+            {
+                if (m.IMDB_Rating != null && m.IMDB_Rating >= IMBD)
+                    returnMovies.Add(m);
+            }
+            return returnMovies;
+        }
     }
 }

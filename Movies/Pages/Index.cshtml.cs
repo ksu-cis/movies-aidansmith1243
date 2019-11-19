@@ -15,11 +15,13 @@ namespace Movies.Pages
         public String Search { get; set; } = "";
         [BindProperty]
         public List<string> mpaa { get; set; } = new List<string>();
+        [BindProperty]
+        public double? IMBD { get; set; } 
         public void OnGet()
         {
             Movies = MovieDatabase.All;
         }
-        public void OnPost(string search, List<string> mpaa)
+        public void OnPost(string search, List<string> mpaa, double? IMBD)
         {
             if(search != null && mpaa.Count > 0)
             {
@@ -36,6 +38,11 @@ namespace Movies.Pages
             else
             {
                 Movies = MovieDatabase.All;
+            }
+            
+            if(IMBD != null)
+            {
+                Movies = MovieDatabase.FilterByIMBD(Movies,IMBD);
             }
         }
     }

@@ -5,65 +5,75 @@
 }
 
 <h1>Movies</h1>
+<div class="container">
 
-<form method="post">
-    <input type="text" name="search" value="@Model.Search"/>
-    <label>
-        <input type="checkbox" value="G" name="mpaa" checked="@Model.mpaa.Contains("G")"/>
-        Rated G
-    </label>
-    <label>
-        <input type="checkbox" value="PG" name="mpaa" checked="@Model.mpaa.Contains("PG")"/>
-        Rated PG
-    </label>
-    <label>
-        <input type="checkbox" value="PG-13" name="mpaa" checked="@Model.mpaa.Contains("PG-13")"/>
-        Rated PG-13
-    </label>
-    <label>
-        <input type="checkbox" value="R" name="mpaa" checked="@Model.mpaa.Contains("R")"/>
-        Rated R
-    </label>
-    <label>
-        <input type="checkbox" value="NC-17" name="mpaa" checked="@Model.mpaa.Contains("NC-17")"/>
-        Rated NC-17
-    </label>
-
-    <input type="submit" value="search" />
-</form>
-
-@foreach(Movie m in Model.Movies)
-{
-<div class="movie-entry">
-    @if (m.Release_Year != null)
-    {
-        <h2>@m.Title ( @m.Release_Year )</h2>
-    }
-    else
-    {
-        <h2>@m.Title </h2>
-    }
-    @if (m.MPAA_Rating != null)
-    {
-        <div class="MPAA_Rating">Rated: @m.MPAA_Rating</div>
-    }
-    @if (m.Major_Genre != null)
-    {
-        <div class="major-genre">Genre: @m.Major_Genre</div>
-    }
-    @if (m.Director != null)
-    {
-        <div class="director">Directed by: @m.Director</div>
-    }
-    <div class="ratings">
-        @if (m.IMDB_Rating != null)
+    <div class="results">
+        @foreach (Movie m in Model.Movies)
         {
-            <div class="IMDB_Rating">IMBD: <h3>@m.IMDB_Rating</h3></div>
-        }
-        @if (m.Rotten_Tomatoes_Rating != null)
-        {
-            <div class="Rotten_Tomatoes_Rating">Rotten Tomatoes: <h3>@m.Rotten_Tomatoes_Rating</h3></div>
+            <div class="movie-entry">
+                @if (m.Release_Year != null)
+                {
+                    <h2>@m.Title ( @m.Release_Year )</h2>
+                }
+                else
+                {
+                    <h2>@m.Title </h2>
+                }
+                @if (m.MPAA_Rating != null)
+                {
+                    <div class="MPAA_Rating">Rated: @m.MPAA_Rating</div>
+                }
+                @if (m.Major_Genre != null)
+                {
+                    <div class="major-genre">Genre: @m.Major_Genre</div>
+                }
+                @if (m.Director != null)
+                {
+                    <div class="director">Directed by: @m.Director</div>
+                }
+                <div class="ratings">
+                    @if (m.IMDB_Rating != null)
+                    {
+                        <div class="IMDB_Rating">IMBD: <h3>@m.IMDB_Rating</h3></div>
+                    }
+                    @if (m.Rotten_Tomatoes_Rating != null)
+                    {
+                        <div class="Rotten_Tomatoes_Rating">Rotten Tomatoes: <h3>@m.Rotten_Tomatoes_Rating</h3></div>
+                    }
+                </div>
+            </div>
         }
     </div>
+    <div class="entry">
+    <form method="post">
+        <input type="text" name="search" value="@Model.Search" />
+        <label>
+            <input type="checkbox" value="G" name="mpaa" checked="@Model.mpaa.Contains("G")" />
+            Rated G
+        </label>
+        <label>
+            <input type="checkbox" value="PG" name="mpaa" checked="@Model.mpaa.Contains("PG")" />
+            Rated PG
+        </label>
+        <label>
+            <input type="checkbox" value="PG-13" name="mpaa" checked="@Model.mpaa.Contains("PG-13")" />
+            Rated PG-13
+        </label>
+        <label>
+            <input type="checkbox" value="R" name="mpaa" checked="@Model.mpaa.Contains("R")" />
+            Rated R
+        </label>
+        <label>
+            <input type="checkbox" value="NC-17" name="mpaa" checked="@Model.mpaa.Contains("NC-17")" />
+            Rated NC-17
+        </label>
+
+        <label>
+            Minimum IMBD Rating
+            <input tpye="number" ,min="0" ,max="10" ,step=".1" name="IMBD" value="@Model.IMBD" />
+        </label>
+
+        <input type="submit" value="search" />
+    </form>
+        </div>
 </div>
-}
