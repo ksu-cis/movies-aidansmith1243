@@ -28,7 +28,7 @@ namespace Movies
 
         public List<Movie> All { get { return movies; } }
         public List<Movie> Search(string search)
-        {
+        {            
             List<Movie> movies = new List<Movie>();
             foreach(Movie m in All)
             {
@@ -39,6 +39,18 @@ namespace Movies
                 
             }
             return movies;
+        }
+        public List<Movie> Filter(List<Movie> movies, List<string> mpaa)
+        {
+            List<Movie> returnMovies = new List<Movie>();
+            foreach (Movie m in movies)
+            {
+                if (m.MPAA_Rating != null && mpaa.Contains(m.MPAA_Rating))
+                {
+                    returnMovies.Add(m);
+                }
+            }
+            return returnMovies;
         }
     }
 }

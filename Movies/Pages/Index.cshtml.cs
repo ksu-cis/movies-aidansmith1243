@@ -11,13 +11,32 @@ namespace Movies.Pages
     {
         public MovieDatabase MovieDatabase = new MovieDatabase();
         public List<Movie> Movies;
+        [BindProperty]
+        public String Search { get; set; } = "";
+        [BindProperty]
+        public List<string> mpaa { get; set; } = new List<string>();
         public void OnGet()
         {
             Movies = MovieDatabase.All;
         }
-        public void OnPost(string search)
+        public void OnPost(string search, List<string> mpaa)
         {
-            Movies = MovieDatabase.Search(search);
+            if(search != null && mpaa.Count > 0)
+            {
+                Movies = MovieDatabase.Filter(MovieDatabase.Search(search),mpaa);
+            }
+            else if(search != null)
+            {
+                Movies = MovieDatabase.Search(search);
+            }
+            else if(mpaa.Count > 0)
+            {
+                Movies = MovieDatabase.Filter(MovieDatabase.All,mpaa);
+            }
+            else
+            {
+                Movies = MovieDatabase.All;
+            }
         }
     }
 }

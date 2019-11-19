@@ -7,8 +7,29 @@
 <h1>Movies</h1>
 
 <form method="post">
-    <input type="text" name="search"/>
-    <input type="submit" value="search"/>
+    <input type="text" name="search" value="@Model.Search"/>
+    <label>
+        <input type="checkbox" value="G" name="mpaa" checked="@Model.mpaa.Contains("G")"/>
+        Rated G
+    </label>
+    <label>
+        <input type="checkbox" value="PG" name="mpaa" checked="@Model.mpaa.Contains("PG")"/>
+        Rated PG
+    </label>
+    <label>
+        <input type="checkbox" value="PG-13" name="mpaa" checked="@Model.mpaa.Contains("PG-13")"/>
+        Rated PG-13
+    </label>
+    <label>
+        <input type="checkbox" value="R" name="mpaa" checked="@Model.mpaa.Contains("R")"/>
+        Rated R
+    </label>
+    <label>
+        <input type="checkbox" value="NC-17" name="mpaa" checked="@Model.mpaa.Contains("NC-17")"/>
+        Rated NC-17
+    </label>
+
+    <input type="submit" value="search" />
 </form>
 
 @foreach(Movie m in Model.Movies)
