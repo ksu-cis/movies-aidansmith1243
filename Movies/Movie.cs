@@ -18,5 +18,14 @@ namespace Movies
         public float? Rotten_Tomatoes_Rating { get; set; }
 
         public string Director { get; set; }
+
+        public string Release_Date { get; set; }
+        public string Release_Year {
+            get
+            {
+                string[] x = Release_Date.Split(" ");
+                return x[x.Length - 1];
+            }
+        }
     }
 }

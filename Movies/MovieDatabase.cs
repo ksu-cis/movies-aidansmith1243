@@ -27,5 +27,18 @@ namespace Movies
         }
 
         public List<Movie> All { get { return movies; } }
+        public List<Movie> Search(string search)
+        {
+            List<Movie> movies = new List<Movie>();
+            foreach(Movie m in All)
+            {
+                if(m.Title.Contains(search,StringComparison.OrdinalIgnoreCase) || (m.Director != null && m.Director.Contains(search,StringComparison.OrdinalIgnoreCase)))
+                {
+                    movies.Add(m);
+                }
+                
+            }
+            return movies;
+        }
     }
 }

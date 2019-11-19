@@ -11,10 +11,17 @@
     <input type="submit" value="search"/>
 </form>
 
-@foreach(Movie m in Model.MovieDatabase.All)
+@foreach(Movie m in Model.Movies)
 {
 <div class="movie-entry">
-    <h2>@m.Title</h2>
+    @if (m.Release_Year != null)
+    {
+        <h2>@m.Title ( @m.Release_Year )</h2>
+    }
+    else
+    {
+        <h2>@m.Title </h2>
+    }
     @if (m.MPAA_Rating != null)
     {
         <div class="MPAA_Rating">Rated: @m.MPAA_Rating</div>
