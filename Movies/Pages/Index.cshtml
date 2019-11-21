@@ -46,32 +46,32 @@
         }
     </div>
     <div class="entry">
-    <form method="post">
-        <input type="text" name="search" value="@Model.Search" />
+    <form method="post" id="search-form">
+        <input type="text" name="search" id="serach" value="@Model.Search" />
         <label>
-            <input type="checkbox" value="G" name="mpaa" checked="@Model.mpaa.Contains("G")" />
+            <input type="checkbox" class="mpaa" value="G" name="mpaa" checked="@Model.mpaa.Contains("G")" />
             Rated G
         </label>
         <label>
-            <input type="checkbox" value="PG" name="mpaa" checked="@Model.mpaa.Contains("PG")" />
+            <input type="checkbox" class="mpaa" value="PG" name="mpaa" checked="@Model.mpaa.Contains("PG")" />
             Rated PG
         </label>
         <label>
-            <input type="checkbox" value="PG-13" name="mpaa" checked="@Model.mpaa.Contains("PG-13")" />
+            <input type="checkbox" class="mpaa" value="PG-13" name="mpaa" checked="@Model.mpaa.Contains("PG-13")" />
             Rated PG-13
         </label>
         <label>
-            <input type="checkbox" value="R" name="mpaa" checked="@Model.mpaa.Contains("R")" />
+            <input type="checkbox" class="mpaa" value="R" name="mpaa" checked="@Model.mpaa.Contains("R")" />
             Rated R
         </label>
         <label>
-            <input type="checkbox" value="NC-17" name="mpaa" checked="@Model.mpaa.Contains("NC-17")" />
+            <input type="checkbox" class="mpaa" value="NC-17" name="mpaa" checked="@Model.mpaa.Contains("NC-17")" />
             Rated NC-17
         </label>
 
         <label>
-            Minimum IMBD Rating
-            <input tpye="number" ,min="0" ,max="10" ,step=".1" name="IMBD" value="@Model.IMBD" />
+            Minimum IMDB Rating
+            <input tpye="number" ,min="0" ,max="10" ,step=".1" name="IMDB" id="minIMDB" value="@Model.IMBD" />
         </label>
 
         <input type="submit" value="search" />
