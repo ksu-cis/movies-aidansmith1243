@@ -9,7 +9,7 @@ namespace Movies.Pages
 {
     public class IndexModel : PageModel
     {
-        public MovieDatabase MovieDatabase = new MovieDatabase();
+        //public MovieDatabase MovieDatabase = new MovieDatabase();
         public List<Movie> Movies;
         [BindProperty]
         public String Search { get; set; } = "";
@@ -23,23 +23,16 @@ namespace Movies.Pages
         }
         public void OnPost(string search, List<string> mpaa, double? IMBD)
         {
-            if(search != null && mpaa.Count > 0)
+            Movies = MovieDatabase.All;
+
+            if(search != null)
             {
-                Movies = MovieDatabase.Filter(MovieDatabase.Search(search),mpaa);
+                Movies = MovieDatabase.Search(Movies,search);
             }
-            else if(search != null)
+            if(mpaa.Count > 0)
             {
-                Movies = MovieDatabase.Search(search);
+                Movies = MovieDatabase.Filter(Movies,mpaa);
             }
-            else if(mpaa.Count > 0)
-            {
-                Movies = MovieDatabase.Filter(MovieDatabase.All,mpaa);
-            }
-            else
-            {
-                Movies = MovieDatabase.All;
-            }
-            
             if(IMBD != null)
             {
                 Movies = MovieDatabase.FilterByIMBD(Movies,IMBD);

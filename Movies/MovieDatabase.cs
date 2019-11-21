@@ -10,27 +10,28 @@ namespace Movies
     /// <summary>
     /// A class representing a database of movies
     /// </summary>
-    public class MovieDatabase
+    public static class MovieDatabase
     {
-        private List<Movie> movies = new List<Movie>();
+        private static List<Movie> movies;
 
-        /// <summary>
-        /// Loads the movie database from the JSON file
-        /// </summary>
-        public MovieDatabase() {
-            
-            using (StreamReader file = System.IO.File.OpenText("movies.json"))
-            {
-                string json = file.ReadToEnd();
-                movies = JsonConvert.DeserializeObject<List<Movie>>(json);
-            }
+        public static List<Movie> All 
+        { 
+            get {
+                if (movies == null)
+                {
+                    using (StreamReader file = System.IO.File.OpenText("movies.json"))
+                    {
+                        string json = file.ReadToEnd();
+                        movies = JsonConvert.DeserializeObject<List<Movie>>(json);
+                    }
+                }
+                return movies; 
+            } 
         }
-
-        public List<Movie> All { get { return movies; } }
-        public List<Movie> Search(string search)
+        public static List<Movie> Search(List<Movie> mIn,string search)
         {            
             List<Movie> movies = new List<Movie>();
-            foreach(Movie m in All)
+            foreach(Movie m in mIn)
             {
                 if(m.Title.Contains(search,StringComparison.OrdinalIgnoreCase) || (m.Director != null && m.Director.Contains(search,StringComparison.OrdinalIgnoreCase)))
                 {
@@ -40,7 +41,7 @@ namespace Movies
             }
             return movies;
         }
-        public List<Movie> Filter(List<Movie> movies, List<string> mpaa)
+        public static List<Movie> Filter(List<Movie> movies, List<string> mpaa)
         {
             List<Movie> returnMovies = new List<Movie>();
             foreach (Movie m in movies)
@@ -52,7 +53,7 @@ namespace Movies
             }
             return returnMovies;
         }
-        public List<Movie> FilterByIMBD(List<Movie> movies, double? IMBD)
+        public static List<Movie> FilterByIMBD(List<Movie> movies, double? IMBD)
         {
             List<Movie> returnMovies = new List<Movie>();
             foreach (Movie m in movies)
